@@ -1,0 +1,142 @@
+
+
+<form #userForm="ngForm" (ngSubmit)="OnSubmitCreateSR()">   
+
+    <div>
+        <div fxFlex="14" >
+            
+            <button  color="primary"  mat-button type="button" (click)="SetActive()" *ngIf="targetModel.IsActive && !targetModel.IsPublic" >Tarcza aktywowana</button>
+            <button color="warn" mat-button type="button" (click)="SetActive()" *ngIf="!targetModel.IsActive && !targetModel.IsPublic" >Tarcza dezaktywowana</button>
+        </div>
+        <div fxFlex="45" fxLayoutAlign="start"> 
+
+            <mat-form-field appearance="fill" style="width:400px !important">
+                <mat-label>Nazwa</mat-label>
+                <input matInput required ngModel name="Target-Name" [(ngModel)]="targetModel.Name"><br>
+                </mat-form-field> <br>
+        </div>
+    </div>
+
+    <div>
+        
+    <div *ngIf = "targetModel.Size != null">
+      
+        <mat-chip-list aria-label="size selection">
+            <mat-chip *ngFor="let size of targetModel.Size; let i = index"  (removed)="removeSize2(size.Id)"> 
+                                    
+                  {{size.Description}} {{size.SizeX}} cm X {{size.SizeY}} cm
+                                  
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                    </button>
+            </mat-chip>
+        </mat-chip-list>
+
+    </div>
+    <div>
+        <span fxFlex="45"> 
+    <mat-form-field appearance="fill" style="width:200px !important">
+        <mat-label>Opis</mat-label>
+        <input matInput ngModel name="Target-Description" [(ngModel)]="targetModel.NewSize!.Description" type="text"><br>
+        </mat-form-field> 
+
+        <mat-form-field appearance="fill" style="width:200px !important">
+            <mat-label>Rozmiar X [cm]</mat-label>
+            <input matInput ngModel name="Target-SizeX" [(ngModel)]="targetModel.NewSize!.SizeX" type="number"><br>
+            </mat-form-field> 
+
+    <mat-form-field appearance="fill" style="width:200px !important">
+        <mat-label>Rozmiar Y [cm]</mat-label>
+        <input matInput ngModel name="Target-SizeY" [(ngModel)]="targetModel.NewSize!.SizeY" type="number"><br>
+        </mat-form-field>
+    </span>
+    <span fxFlex="25"> 
+    <button color="primary" mat-button type="button" (click)="AddSize2()">Dodaj rozmiar</button>
+
+</span>
+    </div>
+</div>
+
+<div>
+
+
+    <div *ngIf = "targetModel.Points != null">
+      
+        <mat-chip-list aria-label="size selection">
+            <mat-chip *ngFor="let point of targetModel.Points; let i = index"  (removed)="removePoint(point.Id)"> 
+                                    
+                {{point.Value}} <span *ngIf="point.Special"> X</span>
+                                  
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                    </button>
+            </mat-chip>
+        </mat-chip-list>
+
+    </div>
+
+
+
+    <div form-group>
+        <span fxFlex="20">
+    <mat-form-field appearance="fill" style="width:200px !important">
+        <mat-label>Wartość</mat-label>
+        <input matInput ngModel name="Target-Point" [(ngModel)]="targetModel.NewPoint!.Value" type="number"><br>
+        </mat-form-field>
+        </span>
+
+        <span fxFlex="25"> 
+        <section class="example-section">
+            <mat-checkbox
+                name="Target-Special"
+                class="example-margin"
+                color="primary"
+                [(ngModel)]="targetModel.NewPoint!.Special" 
+                >
+              Punkt specjalny
+            </mat-checkbox>
+          </section>
+
+        </span> 
+        <span fxFlex="20">
+            
+    <button color="primary" mat-button type="button" (click)="AddPoints()">Dodaj punkt</button>
+    </span>
+        </div>
+</div>
+
+<button color="primary" mat-button type="submit" (click)="Submit()" *ngIf="!edit">Zapisz cel</button>
+<button color="primary" mat-button type="submit" (click)="Submit()" *ngIf="edit && !targetModel.IsPublic">Aktualizuj cel</button>
+<button mat-button type="button" (click)="ReturnToList()">wróć do listy</button>
+<button mat-button type="button" (click)="AskForCopyTarget()" *ngIf="edit">utwórz kopię</button>
+<button color="warn" mat-button type="button" (click)="AskForDeleteOneTarget()" *ngIf="edit && !targetModel.IsPublic">Usuń cel</button>
+</form>
+    
+    <input type="file" class="file-input"
+           (change)="onFileSelected($event)" #fileUpload style="display: none;">
+    
+           <div class="file-upload">
+
+            
+             <button 
+             mat-mini-fab color="primary" 
+             class="upload-btn" 
+             (click)="fileUpload.click()"
+             *ngIf="targetModel.AttachmentFile == undefined || targetModel.AttachmentFile == null">
+                 <mat-icon>attach_file</mat-icon>
+             </button>
+
+             <div *ngIf="!(targetModel.AttachmentFile == undefined || targetModel.AttachmentFile == null)">
+                <button mat-mini-fab color="warn"  (click)="RemoveFile(targetModel.AttachmentFile.Id)"><mat-icon>delete</mat-icon></button>
+             </div>
+         </div>
+               
+         <div *ngIf="targetModel.AttachmentFile != undefined"> 
+            <img src="assets/graph/targets/{{targetModel.AttachmentFile!.FullName}}" alt="target" width="150" height="150"><br>
+            {{targetModel.AttachmentFile!.OriginalName}}
+        </div>
+       
+
+<!-- https://www.youtube.com/watch?v=Xaev43AXN_w -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">

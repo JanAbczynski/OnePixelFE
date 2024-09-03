@@ -1,0 +1,36 @@
+<p>{{listOfColor | json}}</p>
+<button (click)="generate()">generate</button>
+<button (click)="reload()">reload</button>
+
+<div >
+  <div >
+  
+  <table class="table" >
+    <tr *ngFor="let row of tableData; let index = index">
+      <td class="frame"
+        (mouseover)="emit(item)"
+        (click)="select(item)"
+        *ngFor="let item of tableData[index]"
+        [ngStyle]="{'background': item.Color}">
+        </td>
+    </tr>
+  </table>
+</div>
+</div>
+
+
+<!-- <div *ngFor="let row of tableData; let index = index" 
+class="canvDiv" >
+  <canvas 
+  *ngFor="let item of tableData[index]" 
+  class="canv" 
+  (mouseover)="emit(item)"
+  id="myCanvas" 
+  (click)="select(item)"
+  width="3" 
+  height="3" 
+  [ngStyle]="{'background': item.Color}">
+    Your browser does not support the HTML canvas tag.
+  </canvas>
+
+</div> -->

@@ -1,0 +1,20 @@
+{{code}}
+
+<div fxLayoutAlign="center" style="min-height: 400px;">
+    <div style="margin-top: 25px;">
+        <form #userForm="ngForm" (ngSubmit)="OnSubmitRestet()" >      
+  
+            <mat-form-field appearance="fill">
+                <mat-label>Hasło</mat-label>
+                <input matInput required ngModel name="Password" [(ngModel)]="userModel.Password"><br>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Powtórz hasło</mat-label>
+                <input matInput required ngModel name="Password" [(ngModel)]="userModel.SecondPass"><br>
+            </mat-form-field><br>
+
+            <button color="primary" mat-button type="submit">Zmień hasło</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<nz-header>
+    <div class="app-header" >
+      <div fxLayout="row" >
+
+        <div fxFlex="15">  
+        <table class="smallTable">
+          <tr>
+            <td>X:</td> <td colspan="2">{{field.CoordinateX}}</td>
+          </tr>
+          <tr>
+            <td>Y:</td> <td colspan="2">{{field.CoordinateY}}</td>
+          </tr>
+          <tr>
+            <td>Color:</td> <td [ngStyle]="{'background': field.Color}"></td><td>{{field.Color}}</td>
+          </tr>
+        </table>
+          
+          <mat-spinner [diameter]="60" *ngIf = loaderStatus></mat-spinner>
+        </div>
+
+        <div  fxFlex="75" fxLayoutAlign="end"> 
+          
+          <mat-icon (click)="LogOut()">power_settings_new</mat-icon>
+
+{{IsLogged()}}
+          <div *ngIf="!IsLogged()">
+            <mat-icon (click)="OpenDialog()">login</mat-icon>
+          </div>
+          <div *ngIf="IsLogged()">
+            logged
+            <span>
+              {{GetUserEmail()}}
+            </span>
+            <span>
+              <mat-icon (click)="LogOut()">power_settings_new</mat-icon>
+            </span>
+          </div>
+
+        </div>
+      </div>
+
+
+
+    </div>
+      
+
+  </nz-header>

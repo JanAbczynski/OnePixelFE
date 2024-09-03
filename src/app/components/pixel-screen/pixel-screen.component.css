@@ -1,0 +1,18 @@
+.table, .table th, .table td {
+  margin: auto;
+  }
+
+.frame {
+    width: 3px;
+    height: 3px;
+    background-color: white;
+}
+
+.canv{    
+  margin-bottom: -5px;
+  margin-top: 0px;
+}
+
+.canvDiv{
+  margin-top: -17px;
+}

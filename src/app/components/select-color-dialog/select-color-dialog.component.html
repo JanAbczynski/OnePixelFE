@@ -1,0 +1,47 @@
+
+
+
+  <table class="tableSelector">
+    <tr>
+        <th>
+            Old
+        </th>
+        <th>
+            New
+        </th>
+    </tr>
+    <tr>
+        <td>            
+            <mat-card class="colorSelector" appearance="outlined"  [ngStyle]="{'background': field.Color}">
+                <mat-card-content>
+                </mat-card-content>
+            </mat-card>
+        </td>
+        <td>            
+            <mat-card class="colorSelector" appearance="outlined"  [ngStyle]="{'background': newColor}">
+                <mat-card-content>
+                </mat-card-content>
+            </mat-card>
+        </td>
+    </tr>
+</table>
+
+<table >
+    <tr *ngFor="let _ of [].constructor(rows); let i = index">
+        <td *ngFor="let _ of [].constructor(fieldsInRow); let j = index">
+            <mat-card 
+            appearance="outlined"  
+            [ngStyle]="{'background': listOfColor[fieldsInRow * i + j]}" 
+            *ngIf="listOfColor[fieldsInRow * i + j]"
+            (click)="selectColor(listOfColor[fieldsInRow * i + j])">
+            <mat-card-content>
+            {{listOfColor[fieldsInRow * i + j]}}
+        </mat-card-content>
+        </mat-card>
+    </td>
+    </tr>
+</table>
+
+
+<button [disabled]="field.Color == newColor" color="primary" mat-button (click)="sendColor()" >Update color</button>
+
