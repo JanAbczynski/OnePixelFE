@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { SelectColorDialogComponent } from '../select-color-dialog/select-color-dialog.component';
 import { LoginService } from '../../services/login.service';
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
+import { SignalrService } from '../../services/signalr.service';
 
 
 
@@ -19,20 +20,36 @@ export class PixelScreenComponent implements OnInit {
   @Output() fieldData = new EventEmitter<Field>();
   rowData: Field[] = [];  
   tableData: Field[][] = [];  
+  public mess: any ;
 
   listOfColorTemp: string[] = ['#000000', '#800000', '#008000', '#808000', '#000080', '#800080', '#008080', '#c0c0c0', '#808080', '#ff0000', '#00ff00', '#ffff00', '#0000ff', '#ff00ff', '#00ffff', '#ffffff']
   
   listOfColor: string[] = []
   
   constructor(
+    public signalrServie: SignalrService,
     public dialog: MatDialog, 
     private pixelScreenService: PixelScreenService,
     private loginService: LoginService
-  ) { }
+  ) {
+    this.signalrServie.currentMessage.subscribe((mess) => {
+      this.mess = mess;
+      if(this.mess){
+        this.tableData[this.mess.coordinateY!][this.mess.coordinateX!].Color = this.mess.color;
+      }
+      console.log('works')
+      console.log(this.mess)
+    });
+   }
 
   ngOnInit(): void {
     this.getScreen();
     this.getColors();
+    this.signalrServie.startConnection();
+    setTimeout(()=>{
+      this.signalrServie.askServerListener();
+    }, 2000)
+
     //this.createTable(10,10);
    // this.HandleTable();
   }
@@ -164,5 +181,9 @@ export class PixelScreenComponent implements OnInit {
           })
         }
       )
+    }
+
+    change(mess: string){
+      this.signalrServie.updateFields(mess);
     }
 }

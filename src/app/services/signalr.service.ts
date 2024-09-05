@@ -16,6 +16,10 @@ export class SignalrService {
   changeMessage(message: string){
     this.messageSource.next(message);
   }
+  
+  updateFields(message: string){
+    this.messageSource.next(message);
+  }
 
   invoke(message: string) {
     this.hubConnection.invoke("Send", message);

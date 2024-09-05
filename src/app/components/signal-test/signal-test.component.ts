@@ -38,6 +38,7 @@ export class SignalTestComponent implements OnInit, OnDestroy {
   }
 
   change(mess: string){
+    this.signalrServie.updateFields(mess);
     this.signalrServie.changeMessage(mess);
   }
 
