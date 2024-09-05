@@ -16,11 +16,13 @@ import { TargetEditComponent } from './components/target/target-edit/target-edit
 import { CrewStandComponent } from './components/crew/crew-stand/crew-stand.component';
 import { PixelScreenComponent } from './components/pixel-screen/pixel-screen.component';
 import { PassReseterComponent } from './components/pass-reseter/pass-reseter.component';
+import { SignalTestComponent } from './components/signal-test/signal-test.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/hello' },
+  { path: '', pathMatch: 'full', redirectTo: '/Signal' },
   // { path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) },
-  {path: 'hello', component: PixelScreenComponent},
+  { path: 'hello', component: PixelScreenComponent},
+  { path: 'Signal', component: SignalTestComponent},  
   { path: 'passChanger/:code', component: PassReseterComponent},
   { path: 'confirmation/:id', component: ConfirmationComponent},
   { path: 'profile/security', component: ProfileSecurityComponent},

@@ -65,6 +65,7 @@ import { PixelScreenComponent } from './components/pixel-screen/pixel-screen.com
 import { PassReseterComponent } from './components/pass-reseter/pass-reseter.component';
 import { ResetPassDialogComponent } from './components/reset-pass-dialog/reset-pass-dialog.component';
 import { SelectColorDialogComponent } from './components/select-color-dialog/select-color-dialog.component';
+import { SignalTestComponent } from './components/signal-test/signal-test.component';
 
 
 registerLocaleData(pl);
@@ -100,6 +101,7 @@ registerLocaleData(pl);
     DocumentComponent,
     PixelScreenComponent,
     PassReseterComponent,
+    SignalTestComponent,
     ArrayOfComponents
   ],
   entryComponents: [LoginDialogComponent],

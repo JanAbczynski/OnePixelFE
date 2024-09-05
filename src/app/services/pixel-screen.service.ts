@@ -18,6 +18,10 @@ export class PixelScreenService {
 
     url = environment.apiUrl + "/Screen";
 
+    AsyncTest(field: Field) {
+      return this.http.post<any>(this.url + "/UpdateOneFieldWithSignal", field, this.loginService.SetOpts());
+    }
+
     public InitScreen(screen: Field[][]){
       return this.http.post<any>(this.url + "/InitScreen", screen, this.loginService.SetOpts());
     }
@@ -27,7 +31,7 @@ export class PixelScreenService {
   }
 
     updateOneField(field: Field) {
-      return this.http.post<any>(this.url + "/UpdateOneField", field, this.loginService.SetOpts());
+      return this.http.post<any>(this.url + "/UpdateOneFieldWithSignal", field, this.loginService.SetOpts());
     }
     getColors(listOfColorTemp: string[]) {
       return this.http.post<any>(this.url + "/GetColors", listOfColorTemp, this.loginService.SetOpts());
